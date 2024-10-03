@@ -1,0 +1,15 @@
+.profile {
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 632px) {
+  .profile {
+    flex-direction: column-reverse;
+    overflow-y: auto;
+  }
+}

@@ -1,0 +1,71 @@
+.form_register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    margin: 0 auto;
+    padding: 24px;
+    max-width: 500px;
+    flex-grow: 1;
+}
+
+.form_register__title {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.form_register__inputs_container {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+}
+
+.form_register__input_container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.form_register__input_label {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.form_register__input {
+    border: 1px solid white;
+    border-radius: 6px;
+    color: darkslategrey;
+    margin: 0;
+    padding: 8px;
+}
+
+.form_register__input_error {
+    border: 1px solid red;
+}
+
+.form_register__error {
+    color: red;
+    height: 20px;
+    font-size: 12px;
+}
+
+.form_register__button {
+    border: 1px solid white;
+    border-radius: 6px;
+    margin: 0;
+    padding: 8px;
+}
+
+.form_register__button_disable {
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+    padding: 8px;
+}

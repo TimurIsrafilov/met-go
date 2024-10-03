@@ -1,0 +1,59 @@
+.user_info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 auto;
+    padding: 24px;
+    max-width: 500px;
+    flex-grow: 1;
+}
+
+.user_info__button {
+    font-size: 18px;
+    text-decoration: underline;
+    margin: 0;
+    padding: 0;
+}
+
+.user_info__title {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.user_info__data {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.user_info__note_header {
+    display: flex;
+    gap: 10px;
+}
+
+.user_info__note_title {
+    width: 70px;
+    word-break: break-word;
+}
+
+.user_info__note_description {
+    width: 170px;
+    word-break: break-word;
+}
+
+.user_info__notes_container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: auto;
+}
+
+.user_info__note_container {
+    display: flex;
+    gap: 10px;
+}
+
+.user_info__note_delete {
+    cursor: pointer;
+}
