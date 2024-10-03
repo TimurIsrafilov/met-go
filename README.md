@@ -3,6 +3,9 @@
 ### Описание:
 Создано приложение на front-end с функционалом регистрации и создания заметок.
 
+Приложение задеплоено по ссылке:
+https://timurisrafilov.github.io/met-go/register
+
 Использован стек технологий:
 - Next.js (page routing) c TypeScript, Redux, React-hook-form
 - для валидации использована библиотека yup
