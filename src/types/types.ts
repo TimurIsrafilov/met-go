@@ -7,5 +7,8 @@ export type TypeUserForm = {
 export type TypeNoteForm = {
   title: string;
   description: string;
+};
+
+export type TypeNoteFormKey = TypeNoteForm & {
   key: string;
 };

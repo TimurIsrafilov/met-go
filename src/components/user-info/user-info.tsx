@@ -2,14 +2,14 @@ import { useRouter } from "next/navigation";
 import styles from "./user-info.module.css";
 import { selectUser, deleteUser } from "@/services/user";
 import { selectNotes, deleteNote } from "@/services/notes";
-import { TypeUserForm, TypeNoteForm } from "@/types/types";
+import { TypeUserForm, TypeNoteFormKey } from "@/types/types";
 import { useAppSelector, useAppDispatch } from "@/hooks/hooks";
 
 function User() {
   const router = useRouter();
 
   const user: TypeUserForm | null = useAppSelector(selectUser);
-  const notes: Array<TypeNoteForm> = useAppSelector(selectNotes);
+  const notes: Array<TypeNoteFormKey> = useAppSelector(selectNotes);
 
   const dispatch = useAppDispatch();
   function handleNoteDelete(key: string): void {
@@ -43,9 +43,9 @@ function User() {
           Note description:
         </h3>
       </div>
-      
+
       <div className={styles.user_info__notes_container}>
-        {notes.map((item: TypeNoteForm) => (
+        {notes.map((item: TypeNoteFormKey) => (
           <div className={styles.user_info__note_container} key={item.key}>
             <h4 className={styles.user_info__note_title}>{item.title}</h4>
             <p className={styles.user_info__note_description}>

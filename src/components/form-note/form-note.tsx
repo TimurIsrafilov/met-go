@@ -6,15 +6,29 @@ import { TypeNoteForm } from "@/types/types";
 import { addNote } from "@/services/notes";
 import { useAppDispatch } from "@/hooks/hooks";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { InferType } from "yup";
+
 export default function FormNote(): React.JSX.Element {
+  const SignupSchema = yup.object().shape({
+    title: yup.string().required(),
+    description: yup.string().required(),
+  });
+
+  type Schema = InferType<typeof SignupSchema>;
+
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm<TypeNoteForm>({ mode: "onChange" });
+  } = useForm<Schema>({
+    mode: "onChange",
+    resolver: yupResolver(SignupSchema),
+  });
 
   const dispatch = useAppDispatch();
-  const onSubmit: SubmitHandler<TypeNoteForm> = (data) =>
+  const onSubmit: SubmitHandler<TypeNoteForm> = (data: TypeNoteForm) =>
     dispatch(addNote({ ...data, key: uuidv4() }));
 
   return (
@@ -30,16 +44,10 @@ export default function FormNote(): React.JSX.Element {
             }`}
             type="text"
             placeholder="Enter note title"
-            {...register("title", {
-              required: {
-                value: true,
-                message: "title is required",
-              },
-            })}
-            aria-invalid={errors.title ? true : false}
+            {...register("title")}
           />
           <span className={styles.form_note__error}>
-            {errors.title && <a role="alert">{errors.title.message}</a>}
+            {errors.title && <p>{errors.title.message}</p>}
           </span>
         </div>
 
@@ -53,18 +61,10 @@ export default function FormNote(): React.JSX.Element {
             }`}
             type="text"
             placeholder="Enter note description"
-            {...register("description", {
-              required: {
-                value: true,
-                message: "description is required",
-              },
-            })}
-            aria-invalid={errors.description ? true : false}
+            {...register("description")}
           />
           <span className={styles.form_note__error}>
-            {errors.description && (
-              <a role="alert">{errors.description.message}</a>
-            )}
+            {errors.description && <p>{errors.description.message}</p>}
           </span>
         </div>
       </div>

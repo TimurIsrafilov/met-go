@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TypeNoteForm } from "@/types/types";
+import { TypeNoteFormKey } from "@/types/types";
 import { RootState } from "@/services/store";
 
 type TypeNoteState = {
-  notes: Array<TypeNoteForm>;
+  notes: Array<TypeNoteFormKey>;
 };
 
 const initialState: TypeNoteState = {

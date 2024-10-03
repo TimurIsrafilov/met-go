@@ -7,14 +7,29 @@ import { TypeUserForm } from "@/types/types";
 import { addUser } from "@/services/user";
 import { useAppDispatch } from "@/hooks/hooks";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { InferType } from "yup";
+
 export default function FormRegister(): React.JSX.Element {
   const router = useRouter();
+
+  const SignupSchema = yup.object().shape({
+    firstName: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required(),
+  });
+
+  type Schema = InferType<typeof SignupSchema>;
 
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm<TypeUserForm>({ mode: "onChange" });
+  } = useForm<Schema>({
+    mode: "onChange",
+    resolver: yupResolver(SignupSchema),
+  });
 
   const dispatch = useAppDispatch();
   const onSubmit: SubmitHandler<TypeUserForm> = (data) => {
@@ -28,6 +43,7 @@ export default function FormRegister(): React.JSX.Element {
   return (
     <form className={styles.form_register} onSubmit={handleSubmit(onSubmit)}>
       <h1 className={styles.form_register__title}>Register Form</h1>
+
       <div className={styles.form_register__inputs_container}>
         <div className={styles.form_register__input_container}>
           <label className={styles.form_register__input_label}>Name</label>
@@ -37,16 +53,10 @@ export default function FormRegister(): React.JSX.Element {
             }`}
             type="text"
             placeholder="Enter your name"
-            {...register("firstName", {
-              required: {
-                value: true,
-                message: "name is required",
-              },
-            })}
-            aria-invalid={errors.firstName ? true : false}
+            {...register("firstName")}
           />
           <span className={styles.form_register__error}>
-            {errors.firstName && <a role="alert">{errors.firstName.message}</a>}
+            {errors.firstName && <p>{errors.firstName.message}</p>}
           </span>
         </div>
 
@@ -58,20 +68,11 @@ export default function FormRegister(): React.JSX.Element {
             }`}
             type="email"
             placeholder="Enter your e-mail"
-            {...register("email", {
-              required: {
-                value: true,
-                message: "e-mail is required",
-              },
-              pattern: {
-                value: /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/,
-                message: "Invalid e-mail format",
-              },
-            })}
+            {...register("email")}
             aria-invalid={errors.email ? true : false}
           />
           <span className={styles.form_register__error}>
-            {errors.email && <a role="alert">{errors.email.message}</a>}
+            {errors.email && <p>{errors.email.message}</p>}
           </span>
         </div>
 
@@ -83,20 +84,11 @@ export default function FormRegister(): React.JSX.Element {
             }`}
             type="password"
             placeholder="Enter your password"
-            {...register("password", {
-              required: {
-                value: true,
-                message: "password is required",
-              },
-              minLength: {
-                value: 6,
-                message: "min 6 simbols allowed",
-              },
-            })}
+            {...register("password")}
             aria-invalid={errors.password ? true : false}
           />
           <div className={styles.form_register__error}>
-            {errors.password && <a role="alert">{errors.password.message}</a>}
+            {errors.password && <p>{errors.password.message}</p>}
           </div>
         </div>
       </div>
